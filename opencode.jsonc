@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "plain": {
+      "description": "Claude Opus 4.6 with pi system prompt",
+      "model": "github-copilot/claude-opus-4.6",
+      "prompt": "{file:./prompts/pi.txt}"
+    }
+  },
+  "mcp": {
+    "atlassian": {
+      "type": "remote",
+      "url": "https://mcp.atlassian.com/v1/mcp",
+      "enabled": false
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest",
+        "--browser", "chrome",
+        "--caps", "devtools",
+        "--codegen", "none",
+        "--console-level", "info",
+        "--ignore-https-errors",
+        "--viewport-size", "1920x1080"
+      ],
+      "enabled": false
+    }
+  }
+}

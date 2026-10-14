@@ -58,9 +58,9 @@ Before posting anything, print a validation table so you can self-check:
 
 Review this table. If any line's content does not match what the caller provided, resolve the discrepancy (use the content-matched line) or skip. Only proceed with comments marked **OK**.
 
-### Step 4: Build a JSON payload file
+### Step 4: Build the JSON payload
 
-Write a temporary JSON file (use /tmp/) with this structure:
+Build a JSON payload with this structure (you will pipe it to `gh` in Step 5; do not write it to a file):
 
 ```json
 {
@@ -89,20 +89,31 @@ The `body` field is the top-level review summary shown above all inline comments
 
 ### Step 5: Submit the review
 
+Pass the payload on stdin with a quoted heredoc:
+
 ```bash
 gh api repos/{owner}/{repo}/pulls/{pr_number}/reviews \
   --method POST \
-  --input /tmp/review.json
+  --input - <<'REVIEW_JSON_EOF'
+{
+  "commit_id": "...",
+  "event": "COMMENT",
+  "body": "...",
+  "comments": [ ... ]
+}
+REVIEW_JSON_EOF
 ```
 
-Always use `--input` with a file. Never use inline `--field` for the comments array -- it breaks on quotes, backticks, and newlines.
+Always use `--input -` with a quoted heredoc (`<<'REVIEW_JSON_EOF'`), so the shell does not expand `$`, backticks, or quotes inside comment bodies. Never use inline `--field` for the comments array -- it breaks on quotes, backticks, and newlines. Make sure the payload is valid JSON (escape `"` and newlines inside strings as `\"` and `\n`).
 
 ## General (non-inline) comments
 
 If a comment is not tied to a specific line, post it as a general PR comment:
 
 ```bash
-gh pr comment <PR_URL> --body "Comment text"
+gh pr comment <PR_URL> --body-file - <<'COMMENT_EOF'
+Comment text
+COMMENT_EOF
 ```
 
 ## After posting

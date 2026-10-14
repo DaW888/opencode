@@ -1,10 +1,14 @@
 ---
 description: Posts review comments to a GitHub PR via gh CLI.
 mode: subagent
-model: github-copilot/claude-sonnet-4.6
-permission:
-  bash: allow
-  edit: deny
+model: github-copilot/claude-sonnet-5.5
+permissions:
+  - action: shell
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
 ---
 
 You are a helper agent that posts review comments to a GitHub Pull Request using the `gh` CLI.

@@ -4,3 +4,4 @@ package-lock.json
 bun.lock
 *.crt
 .DS_Store
+service.json

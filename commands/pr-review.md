@@ -1,6 +1,6 @@
 ---
 description: Review a GitHub PR and optionally post comments
-subtask: false
+subagent: false
 ---
 
 # PR Review Command

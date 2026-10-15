@@ -12,6 +12,7 @@
 - No unrelated refactors, reformatting, or cleanup.
 - Repo conventions, scripts, and pinned versions override the tool preferences below. Don't switch package managers or create competing lockfiles.
 - Non-interactive commands only; no editors or TUIs.
+- Before reading, writing, or reviewing `.ts`, `.tsx`, `.mts`, or `.cts` files, load the `typescript` skill once per session.
 
 ## Tools
 

@@ -16,5 +16,8 @@
     "notifications": true,
     "sound": true,
     "volume": 0.25
-  }
+  },
+  "plugins": [
+    "-opencode.merman"
+  ]
 }
